@@ -1,12 +1,12 @@
 "use client"
 import React, { Suspense, useRef, useState } from "react"
-import { Canvas } from "@react-three/fiber"
 import Loading from "@/components/Loading"
-import Car from "@/models/Car"
 import emailjs from "@emailjs/browser"
 import useAlert from "@/hooks/useAlert"
 import Alert from "@/components/Alert"
-
+import dynamic from "next/dynamic"
+const Canvas = dynamic(() => import("@react-three/fiber").then(mod => mod.Canvas), { ssr: false })
+const Car = dynamic(() => import("@/models/Car"), { ssr: false })
 const Page = () => {
   const formRef = useRef(null)
   const [value, setValue] = useState({ name: "", email: "", message: "" })

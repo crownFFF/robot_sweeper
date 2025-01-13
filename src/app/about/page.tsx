@@ -1,11 +1,11 @@
 "use client"
-import RobotPink from "@/models/RoboxPink"
-import { Canvas } from "@react-three/fiber"
 import { Suspense, useState } from "react"
 import { skills } from "@/constants"
 import Link from "next/link"
 import Loading from "@/components/Loading"
-
+import dynamic from "next/dynamic"
+const Canvas = dynamic(() => import("@react-three/fiber").then(mod => mod.Canvas), { ssr: false })
+const RobotPink = dynamic(() => import("@/models/RoboxPink"), { ssr: false })
 const Page = () => {
     const [sayHi, setSayHi] = useState(false)
   const [scrollY, setScrollY] = useState(0)
@@ -13,6 +13,7 @@ const Page = () => {
     const scrollPosition = e.currentTarget.scrollTop
     setScrollY(scrollPosition)
   }
+
   return (
     <section className=" aboutPage">
       <Canvas
