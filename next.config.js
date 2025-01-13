@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output:'export',
   transpilePackages: ['three'],
+  experimental:{
+    appDir:true
+  }
 };
 
-export default nextConfig;
+module.exports = nextConfig
