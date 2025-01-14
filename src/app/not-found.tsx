@@ -1,8 +1,9 @@
 'use client'
-import Lottie, { LottieRefCurrentProps } from "lottie-react"
+import { LottieRefCurrentProps } from "lottie-react"
 import notFoundAnimatiom from "@/animation/notfound.json"
 import { useRef } from "react"
-
+import dynamic from "next/dynamic"
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false })
 export default function NotFound() {
     const notRef = useRef<LottieRefCurrentProps>(null!)
   return (

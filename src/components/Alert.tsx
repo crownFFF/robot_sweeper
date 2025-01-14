@@ -1,8 +1,9 @@
 "use client"
 import React, { useRef } from "react"
-import Lottie, { LottieRefCurrentProps } from "lottie-react"
+import { LottieRefCurrentProps } from "lottie-react"
 import successAnimatiom from "@/animation/success.json"
-
+import dynamic from "next/dynamic"
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false })
 interface AlertProps {
   show?: boolean
   type: string
