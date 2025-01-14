@@ -8,12 +8,16 @@ const Logo: React.FC<{ isPlay: boolean }> = ({ isPlay }) => {
   const lottieRef = useRef<LottieRefCurrentProps>(null!)
 
   useEffect(() => {
-    if (isPlay) {
-      lottieRef.current.setDirection(1)
-      lottieRef.current.play()
+    if (lottieRef.current) {
+      if (isPlay) {
+        lottieRef.current.setDirection(1);
+        lottieRef.current.play();
+      } else {
+        lottieRef.current.setDirection(-1);
+        lottieRef.current.play();
+      }
     } else {
-      lottieRef.current.setDirection(-1)
-      lottieRef.current.play()
+      console.warn("Lottie instance not ready yet");
     }
   }, [isPlay])
   return (
