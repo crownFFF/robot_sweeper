@@ -1,0 +1,72 @@
+section {
+  width: 80%;
+  margin: 0 auto;
+  &.homePage {
+    width: 100vw;
+    .infoBlock {
+      position: absolute;
+      background:#000;
+      border: .5rem solid #fff;
+      color: #fff;
+      width: 30%;
+      height: 75vh;
+      z-index: 1;
+      padding: 1rem;
+      &.right{
+        top: 12.5%;
+        right: 5%;
+      }
+      &.left{
+        top: 12.5%;
+        left: 5%;
+      }
+    }
+  }
+}
+
+i {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: block;
+  &.css {
+    background: url("../assets/icons/css.svg") no-repeat center/contain;
+  }
+  &.github {
+    background: url("../assets/icons/github.svg") no-repeat center/contain;
+  }
+  &.javascript {
+    background: url("../assets/icons/javascript.svg") no-repeat center/contain;
+  }
+  &.nextjs {
+    background: url("../assets/icons/nextjs.svg") no-repeat center/contain;
+  }
+  &.nodejs {
+    background: url("../assets/icons/nodejs.svg") no-repeat center/contain;
+  }
+  &.react {
+    background: url("../assets/icons/react.svg") no-repeat center/contain;
+  }
+  &.scss {
+    background: url("../assets/icons/scss.svg") no-repeat center/contain;
+  }
+  &.typescript {
+    background: url("../assets/icons/typescript.svg") no-repeat center/contain;
+  }
+  &.threejs {
+    background: url("../assets/icons/threejs.svg") no-repeat center/contain;
+  }
+  &.html {
+    background: url("../assets/icons/html.svg") no-repeat center/contain;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    font-size: 16px;
+  }
+}
+@media (max-width:460px) {
+  :root{
+    font-size: 14px;
+  }
+}

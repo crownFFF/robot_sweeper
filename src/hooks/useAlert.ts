@@ -1,22 +1,15 @@
-import React, { useState } from 'react'
-
-interface AlertProps {
-  show?: boolean
-  text: string
-  type: string
-}
+import { useState } from 'react'
+import { AlertProps } from '@/lib'
 
 const useAlert = () => {
-  const [alert, setAlert] = useState({ show: false, text: '', type: 'danger' })
+  const [alert, setAlert] = useState({ show: false, type: 'success' })
 
-  const showAlert = ({ text, type = 'danger' }: AlertProps) => setAlert({
+  const showAlert = ({  type = 'danger' }: AlertProps) => setAlert({
     show: true,
-    text,
     type
   })
   const hideAlert = () => setAlert({
     show: false,
-    text: '',
     type: 'danger'
   })
 
