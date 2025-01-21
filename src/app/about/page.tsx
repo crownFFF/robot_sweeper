@@ -1,91 +1,123 @@
 "use client"
-import { Suspense, useState } from "react"
-import { skills } from "@/constants"
-import Link from "next/link"
-import Loading from "@/components/Loading"
+import { skills, experiences } from "@/constants"
+import Image from "next/image"
 import dynamic from "next/dynamic"
-const Canvas = dynamic(() => import("@react-three/fiber").then(mod => mod.Canvas), { ssr: false })
-const RobotPink = dynamic(() => import("@/models/RoboxPink"), { ssr: false })
-const Page = () => {
-    const [sayHi, setSayHi] = useState(false)
-  const [scrollY, setScrollY] = useState(0)
-  const handleScroll = function (e: React.UIEvent<HTMLDivElement>) {
-    const scrollPosition = e.currentTarget.scrollTop
-    setScrollY(scrollPosition)
-  }
+import CTA from "@/components/CTA"
+import "react-vertical-timeline-component/style.min.css"
+import { useState } from "react"
 
+// 动态导入 VerticalTimeline
+const VerticalTimeline = dynamic(
+  () =>
+    import("react-vertical-timeline-component").then(
+      (mod) => mod.VerticalTimeline
+    ),
+  { ssr: false }
+)
+
+const VerticalTimelineElement = dynamic(
+  () =>
+    import("react-vertical-timeline-component").then(
+      (mod) => mod.VerticalTimelineElement
+    ),
+  { ssr: false }
+)
+
+const About = () => {
   return (
-    <section className=" aboutPage">
-      <Canvas
-        style={{
-          height: "100vh",
-          width: "50%",
-          background: "#000",
-        }}
-        camera={{
-          position: [2, 5, 10], // 設置相機的位置 (x, y, z)
-          fov: 75, // 視野角度
-          near: 0.1, // 近剪切面
-          far: 1000, // 遠剪切面
-        }}
-      >
-        <ambientLight intensity={0.5} />
-        <directionalLight intensity={3} />
-        <Suspense fallback={<Loading />}>
-          <RobotPink
-            position={[0, -1, 2]}
-            rotation={[0, 0.25, 0]}
-            scale={[2, 2, 2]}
-            sayHi={sayHi}
-            scrollY={scrollY}
-          />
-        </Suspense>
-      </Canvas>
-      <div className="content">
-        <div className="cardList" onScroll={handleScroll}>
-          <div className="card">
-            <h1>
-              <span className="title">Hi ! </span>
-              <br />I am <span className="name">Tony!</span> Nice to meet you!
-              <br /> This is my Three.js and Next.js Work
-            </h1>
-            <button onClick={() => setSayHi(!sayHi)}>{!sayHi?'Say Hi!!!':'Stop'}</button>
-          </div>
-          <div className="card flex-col">
-            <h1 className="title">SKILLS</h1>
-            <h1>I used these skills in this work</h1>
-            <div className="iconList">
-              {skills.map((skill) => (
-                <div className="iconItem" key={skill.id}>
-                  <i className={skill.name}></i>
-                  <p>{skill.alt}</p>
-                </div>
-              ))}
+    <section className="max-container">
+      <h1 className="head-text">
+        Hello I'm{" "}
+        <span className="blue-gradient_text font-semibold drop-shadow">
+          Tony
+        </span>
+      </h1>
+      <div className="mt-5 flex flex-col gap-3 text-slate-500">
+        <p>
+          Nice to meet you! <br /> This is my THREE.js and NEXT practice
+        </p>
+      </div>
+      <div className="py-10 flex flex-col">
+        <h3 className="subhead-text">My Skills</h3>
+      </div>
+      <div className="mt-16 flex flex-wrap gap-12">
+        {skills.map((skill, index) => (
+          <div className="block-container w-20 h-20" key={index}>
+            <div className="btn-back rounded-xl" />
+            <div className="btn-front rounded-xl flex justify-center items-center">
+              <Image
+                src={skill.imageUrl}
+                alt=""
+                width={16}
+                height={16}
+                className="w-1/2 h-1/2 object-contain"
+              ></Image>
             </div>
           </div>
-          <div className="card  flex-col">
-            <h1 className="title">模型引用</h1>
-            <h1>
-              3D 模型來源於
-              <Link href="https://sketchfab.com/Yandrack" target="_blank">
-                Sketchfab 作者:Yandrack
-              </Link>
-              <br /> 並遵循其授權協議和使用條款
-            </h1>
-            <h1>模型僅用於非商業用途（如展示、學習、研究等）</h1>
-            <h1>
-              Sketchfab網站或原作者Yandrack對模型擁有完整的知識產權。本網站不對模型的原創性、準確性或適用性承擔責任。
-            </h1>
-            <h1>
-              若在使用過程中侵犯到您的權益，請通過{" "}
-              <Link href="mailto:asd8792323@gmail.com">聯繫郵箱</Link>{" "}
-              與我聯繫，我將在收到通知後立即移除相關內容。
-            </h1>
-          </div>
+        ))}
+      </div>
+      <div className="py-16">
+        <h3 className="subhead-text">Work Experience</h3>
+        <div className="mt-5 flex flex-col gap-3 text-slate-500">
+          <p>
+            Nice to meet you! <br /> This is my THREE.js and NEXT practice
+          </p>
         </div>
       </div>
+      <div className="mt-12 flex">
+        <VerticalTimeline>
+          {experiences.map((experience, index) => (
+            <VerticalTimelineElement
+              key={index}
+              date={experience.date}
+              icon={
+                <div className="flex justify-center items-center w-full h-full">
+                  <Image
+                    src={experience.icon}
+                    alt={experience.company_name}
+                    className="w-[60%] h-[60%] object-contain"
+                    width={100}
+                    height={100}
+                  ></Image>
+                </div>
+              }
+              iconStyle={{ background: experience.iconBg }}
+              contentStyle={{
+                borderBottom: "8px",
+                borderStyle: "solid",
+                borderBottomColor: experience.iconBg,
+                boxShadow: "none",
+              }}
+            >
+              <div>
+                <h3 className="text-black text-xl font-poppins font-semibold">
+                  {experience.title}
+                </h3>
+                <p
+                  className="text-black-500 font-medium font-base"
+                  style={{ margin: 0 }}
+                >
+                  {experience.company_name}
+                </p>
+              </div>
+              <ul className="my-5 list-disc ml-5 space-y-2">
+                {experience.points.map((point, index) => (
+                  <li
+                    className="text-black-500/50 font-normal pl-1 text-sm"
+                    key={index}
+                  >
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </VerticalTimelineElement>
+          ))}
+        </VerticalTimeline>
+      </div>
+      <hr className="border-slate-200" />
+      <CTA />
     </section>
   )
 }
 
-export default Page
+export default About
