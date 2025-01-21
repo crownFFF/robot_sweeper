@@ -12,6 +12,7 @@ const Canvas = dynamic(
 const Computer = dynamic(() => import("@/models/Computer"), { ssr: false })
 
 export default function Home() {
+  const [isShow, setIsShow] = useState(true)
   const [info, setInfo] = useState<Info>({
     show: false,
     number: 0,
@@ -57,13 +58,27 @@ export default function Home() {
       >
         <directionalLight intensity={2} />
         <Suspense fallback={<Loading />}>
-          <Computer position={[0, -3, -1]} setInfo={setInfo} setting={setting}/>
+          <Computer
+            position={[0, -3, -1]}
+            setInfo={setInfo}
+            setting={setting}
+          />
         </Suspense>
       </Canvas>
       {info.show && (
         <div className={`infoBlock ${info.position}`}>
-          <h1 className="title">{list[info.number - 1].title}</h1>
-          <div className="content"></div>
+          <h1 className="title">
+            {list[info.number - 1].title}
+            <button
+              className="back"
+              onClick={() => {
+                setIsShow(!isShow)
+              }}
+            >
+              {isShow?'HIDE':'SHOW'}
+            </button>
+          </h1>
+          {isShow && <div className="content"></div>}
         </div>
       )}
     </section>

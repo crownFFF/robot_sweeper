@@ -5,6 +5,7 @@ import { useGLTF } from "@react-three/drei"
 import { useFrame, useThree } from "@react-three/fiber"
 import { computerResult, computerGroup } from "@/lib"
 
+// 攝像機控制
 function CameraController() {
   const { camera } = useThree()
   const perspectiveCamera = camera as THREE.PerspectiveCamera
@@ -65,9 +66,10 @@ function CameraController() {
   return { moveCameraTo }
 }
 
-const Computer: React.FC<computerGroup> = ({ setting,setInfo, ...props }) => {
+const Computer: React.FC<computerGroup> = ({ setting, setInfo, ...props }) => {
   const cameraController = CameraController()
   const { nodes, materials } = useGLTF("/computers.glb") as computerResult
+  // 螢幕
   const screenRef = useRef<THREE.Mesh>(null!)
   const [videoTexture, setVideoTexture] = useState<THREE.VideoTexture | null>(
     null
@@ -99,7 +101,7 @@ const Computer: React.FC<computerGroup> = ({ setting,setInfo, ...props }) => {
           targetPosition[2] + positionArr[2]
         ),
         new THREE.Vector3(...targetPosition),
-        25
+        resize.fov
       )
       setTimeout(() => {
         setInfo({
@@ -112,7 +114,22 @@ const Computer: React.FC<computerGroup> = ({ setting,setInfo, ...props }) => {
     setBack(!back)
   }
 
+  const [resize, setResize] = useState({
+    position: [
+      [0.06, 0.07, 0.3],
+      [-0.18, -0.025, 0.5],
+      [-0.035, 0.023, 0.025],
+      [0.05, 0.07, 0.1],
+      [0.2, 0.025, 0.06],
+      [-1.8, -0.3, 0.06],
+      [-0.05, -0.028, 0.055],
+      [0.025, -0.075, 0.2],
+      [0.22, -0.09, 0.1],
+    ],
+    fov: 25,
+  })
   useEffect(() => {
+    // 螢幕影片
     const video = document.createElement("video")
     video.src = "/video/success.mp4"
     video.loop = true
@@ -122,10 +139,63 @@ const Computer: React.FC<computerGroup> = ({ setting,setInfo, ...props }) => {
     videoTexture.repeat.set(3.5, 3)
     videoTexture.offset.set(-0.05, -1.2)
     setVideoTexture(videoTexture)
+    // 螢幕尺寸移動位置
+    const handleResize = () => {
+      const width = window.innerWidth
+      if (width > 768 && width <= 1000) {
+        setResize({
+          position: [
+            [0.04, 0.1, 0.5],
+            [-0.25, -0.025, 0.5],
+            [-0.045, 0.028, 0.025],
+            [0.07, 0.075, 0.1],
+            [0.15, 0.015, 0.06],
+            [-1.9, -0.2, 0.02],
+            [-0.2, -0.1, 0.2],
+            [0.035, -0.075, 0.2],
+            [0.18, -0.075, 0.1],
+          ],
+          fov: 25,
+        })
+      } else if (width > 460 && width <= 768) {
+        setResize({
+          position: [
+            [0.04, 0.1, 0.5],
+            [-0.25, -0.025, 0.5],
+            [-0.045, 0.028, 0.025],
+            [0.07, 0.075, 0.1],
+            [0.15, 0.015, 0.06],
+            [-2.5, -0.5, 0.05],
+            [-0.2, -0.1, 0.2],
+            [0.035, -0.075, 0.2],
+            [0.18, -0.075, 0.1],
+          ],
+          fov: 35,
+        })
+      } else if (width <= 460) {
+        setResize({
+          position: [
+            [0.04, 0.1, 0.5],
+            [-0.25, -0.025, 0.5],
+            [-0.045, 0.028, 0.025],
+            [0.07, 0.075, 0.1],
+            [0.15, 0.015, 0.06],
+            [-1.9, -0.2, 0.02],
+            [-0.2, -0.1, 0.2],
+            [0.035, -0.075, 0.2],
+            [0.18, -0.075, 0.1],
+          ],
+          fov: 50,
+        })
+      }
+    }
+    handleResize()
+    window.addEventListener("resize", handleResize)
     return () => {
       video.pause()
       video.src = ""
       videoTexture.dispose()
+      window.removeEventListener("resize", handleResize)
     }
   }, [])
 
@@ -140,7 +210,7 @@ const Computer: React.FC<computerGroup> = ({ setting,setInfo, ...props }) => {
           material={materials.Texture}
         />
         <mesh
-          onClick={() => handleClick([0.06, 0.07, 0.3], 1, "right")}
+          onClick={() => handleClick(resize.position[0], 1, "right")}
           ref={screenRef}
           castShadow
           receiveShadow
@@ -159,7 +229,7 @@ const Computer: React.FC<computerGroup> = ({ setting,setInfo, ...props }) => {
           material={materials.Texture}
         />
         <mesh
-          onClick={() => handleClick([-0.18, -0.025, 0.5], 2, "right")}
+          onClick={() => handleClick(resize.position[1], 2, "right")}
           ref={screenRef}
           castShadow
           receiveShadow
@@ -170,7 +240,7 @@ const Computer: React.FC<computerGroup> = ({ setting,setInfo, ...props }) => {
       {/* 3 */}
       <group position={[-2.731, 0.629, -0.522]} rotation={[0, 1.087, 0]}>
         <mesh
-          onClick={() => handleClick([-0.035, 0.023, 0.025], 3, "right")}
+          onClick={() => handleClick(resize.position[2], 3, "right")}
           ref={screenRef}
           castShadow
           receiveShadow
@@ -193,7 +263,7 @@ const Computer: React.FC<computerGroup> = ({ setting,setInfo, ...props }) => {
           material={materials.Texture}
         />
         <mesh
-          onClick={() => handleClick([0.05, 0.07, 0.1], 4, "left")}
+          onClick={() => handleClick(resize.position[3], 4, "left")}
           ref={screenRef}
           castShadow
           receiveShadow
@@ -214,7 +284,7 @@ const Computer: React.FC<computerGroup> = ({ setting,setInfo, ...props }) => {
           material={materials.Texture}
         />
         <mesh
-          onClick={() => handleClick([0.2, 0.025, 0.06], 5, "right")}
+          onClick={() => handleClick(resize.position[4], 5, "right")}
           ref={screenRef}
           castShadow
           receiveShadow
@@ -235,7 +305,7 @@ const Computer: React.FC<computerGroup> = ({ setting,setInfo, ...props }) => {
           material={materials.Texture}
         />
         <mesh
-          onClick={() => handleClick([-1.8, -0.3, 0.06], 6, "right")}
+          onClick={() => handleClick(resize.position[5], 6, "right")}
           ref={screenRef}
           castShadow
           receiveShadow
@@ -252,7 +322,7 @@ const Computer: React.FC<computerGroup> = ({ setting,setInfo, ...props }) => {
           material={materials.Texture}
         />
         <mesh
-          onClick={() => handleClick([-0.045, -0.025, 0.05], 7, "right")}
+          onClick={() => handleClick(resize.position[6], 7, "right")}
           ref={screenRef}
           castShadow
           receiveShadow
@@ -273,7 +343,7 @@ const Computer: React.FC<computerGroup> = ({ setting,setInfo, ...props }) => {
           material={materials.Texture}
         />
         <mesh
-          onClick={() => handleClick([0.025, -0.075, 0.2], 8, "left")}
+          onClick={() => handleClick(resize.position[7], 8, "left")}
           ref={screenRef}
           castShadow
           receiveShadow
@@ -290,7 +360,7 @@ const Computer: React.FC<computerGroup> = ({ setting,setInfo, ...props }) => {
           material={materials.Texture}
         />
         <mesh
-          onClick={() => handleClick([0.22, -0.09, 0.1], 9, "right")}
+          onClick={() => handleClick(resize.position[8], 9, "right")}
           ref={screenRef}
           castShadow
           receiveShadow
