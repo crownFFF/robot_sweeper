@@ -273,6 +273,8 @@ const Computer: React.FC<computerGroup> = ({ setting, setInfo, ...props }) => {
       video.loop = true
       // 靜音
       video.muted = true
+      // 允许内嵌播放（针对移动设备）
+      video.playsInline = true;
       // 自動撥放
       video.play()
       // 影片存入videoRef.current
