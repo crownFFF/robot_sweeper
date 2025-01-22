@@ -5,25 +5,31 @@ import React, { Suspense, useEffect, useState } from "react"
 import { list } from "@/constants"
 import dynamic from "next/dynamic"
 import { Info } from "@/lib"
+// 動態載入
 const Canvas = dynamic(
   () => import("@react-three/fiber").then((mod) => mod.Canvas),
   { ssr: false }
 )
+// 模型
 const Computer = dynamic(() => import("@/models/Computer"), { ssr: false })
 
 export default function Home() {
+  // 顯示狀態控制
   const [isShow, setIsShow] = useState(true)
+  // 資訊顯示控制
   const [info, setInfo] = useState<Info>({
-    show: false,
-    number: 0,
-    position: "right",
+    show: false, //顯示
+    number: 0, //索引
+    position: "right", //位置
   })
+  // 控制相機及模型 位置,fov
   const [setting, setSetting] = useState({
     position: new THREE.Vector3(0, 0, 2.5),
     fov: 100,
   })
 
   useEffect(() => {
+    // 螢幕寬高設定
     const handleResize = () => {
       const width = window.innerWidth
       if (width > 768 && width <= 1000) {
@@ -44,8 +50,10 @@ export default function Home() {
       }
     }
     handleResize()
+    // 監聽
     window.addEventListener("resize", handleResize)
     return () => {
+      // 釋放資源
       window.removeEventListener("resize", handleResize)
     }
   }, [])
@@ -75,10 +83,15 @@ export default function Home() {
                 setIsShow(!isShow)
               }}
             >
-              {isShow?'HIDE':'SHOW'}
+              {isShow ? "HIDE" : "SHOW"}
             </button>
           </h1>
-          {isShow && <div className="content"></div>}
+          {isShow && (
+            <div className="content">
+              {list[info.number - 1].content}
+            </div>
+          )}
+          <div className="remind">點擊螢幕關閉...</div>
         </div>
       )}
     </section>

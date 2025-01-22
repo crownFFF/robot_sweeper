@@ -8,13 +8,12 @@ import { CarResult, CarProps } from "@/lib"
 const Car: React.FC<CarProps> = ({ currentAnimation, ...props }) => {
   const group = useRef<THREE.Group>(null!)
   const { nodes, materials, animations } = useGLTF("/car.glb") as CarResult
+  // 動畫控制
   const { actions } = useAnimations(animations, group)
 
   useEffect(() => {
     Object.values(actions).forEach((action) => action?.stop())
-    console.log(actions);
     if(actions[currentAnimation]){
-      
       actions[currentAnimation].play()
     }
   }, [actions, currentAnimation])

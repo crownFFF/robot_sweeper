@@ -10,6 +10,7 @@ const RobotPink: React.FC<RobotPopups> = ({ scrollY, sayHi, ...props }) => {
   const { nodes, materials, animations } = useGLTF(
     "/cute_home_robot.glb"
   ) as RobotResult
+  // 動畫
   const { actions } = useAnimations(animations, group)
 
   useEffect(() => {
@@ -24,6 +25,7 @@ const RobotPink: React.FC<RobotPopups> = ({ scrollY, sayHi, ...props }) => {
   }, [actions, sayHi])
 
   useFrame(() => {
+    // 控制旋轉動畫
     if (group.current) {
       group.current.rotation.y = -scrollY * 0.01
     }

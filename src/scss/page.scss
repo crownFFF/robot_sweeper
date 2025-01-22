@@ -9,12 +9,16 @@ section {
       border: 0.5rem solid #fff;
       color: #fff;
       width: 30%;
-      max-height: 75vh;
+      max-height: 65vh;
       z-index: 1;
       padding: 1rem;
+      overflow: hidden;
+      box-sizing: content-box;
       .title{
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        height: 5vh;
         .back{
           all: unset;
           cursor: pointer;
@@ -22,7 +26,21 @@ section {
         }
       }
       .content{
-        min-height: 100vh;
+        height: 60vh;
+        overflow: scroll;
+        padding: 2rem;
+        position: relative;
+        .myImg{
+          width: 10rem;
+          height: 10rem;
+          background: #ffffff;
+          margin: 0 auto 2rem;
+        }
+        .personInfo{
+          p{
+            line-height: 2rem;
+          }
+        }
       }
       &.right {
         top: 12.5%;
@@ -31,6 +49,14 @@ section {
       &.left {
         top: 12.5%;
         left: 5%;
+      }
+      .remind{
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        letter-spacing: .25rem;
+        animation: opacityText 1s linear infinite;
       }
     }
   }
@@ -80,11 +106,11 @@ i {
         width: 80%;
         &.right {
           top: 20%;
-          right: 10%;
+          right: 7.5%;
         }
         &.left {
           top: 20%;
-          left: 10%;
+          left: 7.5%;
         }
       }
     }
@@ -94,9 +120,49 @@ i {
   :root {
     font-size: 16px;
   }
+  section {
+    &.homePage {
+      .infoBlock {
+        &.right {
+          top: 15%;
+          right: 7%;
+        }
+        &.left {
+          top: 15%;
+          left: 7%;
+        }
+      }
+    }
+  }
 }
 @media (max-width: 460px) {
   :root {
     font-size: 14px;
+  }
+  section {
+    &.homePage {
+      .infoBlock {
+        &.right {
+          top: 15%;
+          right: 5%;
+        }
+        &.left {
+          top: 15%;
+          left: 5%;
+        }
+      }
+    }
+  }
+}
+
+@keyframes opacityText {
+  0%{
+    opacity: 0.8;
+  }
+  50%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 0.8;
   }
 }

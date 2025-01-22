@@ -7,42 +7,61 @@ import { computerResult, computerGroup } from "@/lib"
 
 // 攝像機控制
 function CameraController() {
+  // 設定相機
   const { camera } = useThree()
   const perspectiveCamera = camera as THREE.PerspectiveCamera
+  // 設定目標位置
   const targetPosition = useRef(new THREE.Vector3())
   const targetLookAt = useRef(new THREE.Vector3())
-  const targetFov = useRef(perspectiveCamera.fov) // 目標 FOV
+  // 目標 FOV
+  const targetFov = useRef(perspectiveCamera.fov)
+  // 動畫
   const isAnimating = useRef(false)
-  const animationProgress = useRef(0) // 動畫進度 (秒)
-  const duration = 1.5 // 動畫時長 (秒)
+  // 動畫進度 (秒)
+  const animationProgress = useRef(0)
+  // 動畫時長 (秒)
+  const duration = 1.5
 
+  // 移動相機
   const moveCameraTo = (
+    // 位置
     position: THREE.Vector3,
     lookAt: THREE.Vector3,
     fov: number
   ) => {
+    // 將新目標位置複製
     targetPosition.current.copy(position)
     targetLookAt.current.copy(lookAt)
+    // 設定新的目標視場角
     targetFov.current = fov
     // 初始化動畫狀態
     animationProgress.current = 0
     isAnimating.current = true
   }
 
+  //  useFrame 是 React Three Fiber 中用於在每一幀中執行邏輯的鉤子
   useFrame((_, delta) => {
+    // delta 每幀間的時間間隔，使用它來確保動畫與幀率無關
+    // 底線 _ 的作用是表示「不使用的參數」。這是一個程式設計中的約定，通常用於強調該參數被忽略或目前不需要。
+
     if (!isAnimating.current) return
     // 更新動畫進度
     animationProgress.current += delta
+
     const t = Math.min(animationProgress.current / duration, 1) // 進度值 [0, 1]
 
     // 使用插值更新位置和方向
+    //  lerp（線性插值）方法
+    // 插值比例由 t 控制，t=0 表示完全在初始位置，t=1 表示完全到達目標位置。
     perspectiveCamera.position.lerp(targetPosition.current, t)
 
+    // 使用 lerpVectors 在相機當前的方向向量與目標方向向量之間進行插值
     const currentLookAt = new THREE.Vector3().lerpVectors(
       perspectiveCamera.getWorldDirection(new THREE.Vector3()),
       targetLookAt.current.clone().sub(perspectiveCamera.position),
       t
     )
+    // 新的目標方向向量加上相機當前位置，並將相機設置為朝向該點
     perspectiveCamera.lookAt(
       perspectiveCamera.position.clone().add(currentLookAt)
     )
@@ -55,6 +74,7 @@ function CameraController() {
     )
 
     // 更新投影矩陣
+    // 當 FOV 或其他相機屬性改變時，必須呼叫 updateProjectionMatrix 更新相機的投影矩陣，確保變化正確應用到渲染中
     perspectiveCamera.updateProjectionMatrix()
 
     // 終止動畫
@@ -67,53 +87,11 @@ function CameraController() {
 }
 
 const Computer: React.FC<computerGroup> = ({ setting, setInfo, ...props }) => {
-  const cameraController = CameraController()
   const { nodes, materials } = useGLTF("/computers.glb") as computerResult
-  // 螢幕
   const screenRef = useRef<THREE.Mesh>(null!)
-  const [videoTexture, setVideoTexture] = useState<THREE.VideoTexture | null>(
-    null
-  )
+  // 返回控制
   const [back, setBack] = useState(false)
-  const handleClick = (
-    positionArr: number[],
-    num: number,
-    position: "right" | "left"
-  ) => {
-    if (back) {
-      cameraController.moveCameraTo(
-        setting.position,
-        new THREE.Vector3(0, 0, 0),
-        setting.fov
-      )
-      setInfo({
-        show: !back,
-        number: num,
-        position: position,
-      })
-    } else {
-      const targetPosition: THREE.Vector3Tuple =
-        screenRef.current.position.toArray()
-      cameraController.moveCameraTo(
-        new THREE.Vector3(
-          targetPosition[0] - positionArr[0],
-          targetPosition[1] + positionArr[1],
-          targetPosition[2] + positionArr[2]
-        ),
-        new THREE.Vector3(...targetPosition),
-        resize.fov
-      )
-      setTimeout(() => {
-        setInfo({
-          show: !back,
-          number: num,
-          position: position,
-        })
-      }, 800)
-    }
-    setBack(!back)
-  }
-
+  // 螢幕放大尺寸
   const [resize, setResize] = useState({
     position: [
       [0.06, 0.07, 0.3],
@@ -128,17 +106,61 @@ const Computer: React.FC<computerGroup> = ({ setting, setInfo, ...props }) => {
     ],
     fov: 25,
   })
+  // 影片貼圖
+  const [videoTexture, setVideoTexture] = useState<THREE.VideoTexture[]>([])
+  const videoRef = useRef<HTMLVideoElement[]>([])
+
+  // 聲明攝像機控制方法
+  const cameraController = CameraController()
+  // 點擊功能
+  const handleClick = (
+    positionArr: number[],
+    num: number,
+    position: "right" | "left"
+  ) => {
+    if (back) {
+      // 相機移動到原點
+      cameraController.moveCameraTo(
+        setting.position,
+        new THREE.Vector3(0, 0, 0),
+        setting.fov
+      )
+      // 訊息控制
+      setInfo({
+        show: !back,
+        number: num,
+        position: position,
+      })
+    } else {
+      // 座標轉換為 THREE.Vector3Tuple 格式
+      const targetPosition: THREE.Vector3Tuple =
+        screenRef.current.position.toArray()
+      // 相機移動到目標位置
+      cameraController.moveCameraTo(
+        new THREE.Vector3(
+          targetPosition[0] - positionArr[0],
+          targetPosition[1] + positionArr[1],
+          targetPosition[2] + positionArr[2]
+        ),
+        new THREE.Vector3(...targetPosition),
+        resize.fov
+      )
+      // 設定訊息顯示時間
+      setTimeout(() => {
+        setInfo({
+          show: !back,
+          number: num,
+          position: position,
+        })
+      }, 800)
+    }
+    // 更新狀態
+    setBack(!back)
+  }
+
+  // 忽略eslint
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    // 螢幕影片
-    const video = document.createElement("video")
-    video.src = "/video/success.mp4"
-    video.loop = true
-    video.muted = true
-    video.play()
-    const videoTexture = new THREE.VideoTexture(video)
-    videoTexture.repeat.set(3.5, 3)
-    videoTexture.offset.set(-0.05, -1.2)
-    setVideoTexture(videoTexture)
     // 螢幕尺寸移動位置
     const handleResize = () => {
       const width = window.innerWidth
@@ -190,14 +212,92 @@ const Computer: React.FC<computerGroup> = ({ setting, setInfo, ...props }) => {
       }
     }
     handleResize()
+    // 監聽
     window.addEventListener("resize", handleResize)
+
+    // 添加影片貼圖
+    const videoSrcs = [
+      {
+        src: "/video/aboutme.mp4",
+        repeat: [3.5, 3],
+        offset: [-0.05, -1.2],
+      },
+      {
+        src: "/video/LearningExperience.mp4",
+        repeat: [3.9, 2.5],
+        offset: [-1.4, -1.66],
+      },
+      {
+        src: "/video/WorkExperience.mp4",
+        repeat: [3.9, 2.6],
+        offset: [-0.15, -1.75],
+      },
+      {
+        src: "/video/Project.mp4",
+        repeat: [4, 1.5],
+        offset: [-1.5, -0.25],
+      },
+      {
+        src: "/video/Licenses.mp4",
+        repeat: [3.5, 1],
+        offset: [-0.1, -0.05],
+      },
+      {
+        src: "/video/PersonalStatement.mp4",
+        repeat: [4, 2.5],
+        offset: [-1.45, -1.7],
+      },
+      {
+        src: "/video/Skills.mp4",
+        repeat: [3, 1],
+        offset: [-1.05, -0.075],
+      },
+      {
+        src: "/video/FutureExpectations.mp4",
+        repeat: [4, 2],
+        offset: [-1.5, -0.65],
+      },
+      {
+        src: "/video/Copyright.mp4",
+        repeat: [3.5, 1.5],
+        offset: [-1.2, -0.35],
+      },
+    ]
+
+    // 設定影片
+    const video = videoSrcs.map((videoData, index) => {
+      const video = document.createElement("video")
+      // 設定影片來源
+      video.src = videoData.src
+      // 循環播放
+      video.loop = true
+      // 靜音
+      video.muted = true
+      // 自動撥放
+      video.play()
+      // 影片存入videoRef.current
+      videoRef.current[index] = video
+      // 將 HTML 視頻元素轉換為可用於材質的紋理
+      const videoTexture = new THREE.VideoTexture(video)
+      // repeat：設置紋理在水平和垂直方向上的重複次數。
+      videoTexture.repeat.set(videoData.repeat[0], videoData.repeat[1])
+      // offset：設置紋理的偏移量（即起始點）。
+      videoTexture.offset.set(videoData.offset[0], videoData.offset[1])
+      return videoTexture
+    })
+    setVideoTexture(video)
+
     return () => {
-      video.pause()
-      video.src = ""
-      videoTexture.dispose()
+      // 釋放資源
       window.removeEventListener("resize", handleResize)
+      videoRef.current.forEach((video) => {
+        video.pause()
+        video.src = ""
+      })
+      videoTexture.forEach((video) => video.dispose())
     }
   }, [])
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   return (
     <group {...props} dispose={null}>
@@ -217,7 +317,7 @@ const Computer: React.FC<computerGroup> = ({ setting, setInfo, ...props }) => {
           geometry={nodes.Object_207.geometry}
           material={materials.Screen}
         >
-          <meshBasicMaterial map={videoTexture} />
+          <meshBasicMaterial map={videoTexture![0]} />
         </mesh>
       </group>
       {/* 2 */}
@@ -235,7 +335,9 @@ const Computer: React.FC<computerGroup> = ({ setting, setInfo, ...props }) => {
           receiveShadow
           geometry={nodes.Object_210.geometry}
           material={materials.Screen}
-        />
+        >
+          <meshBasicMaterial map={videoTexture![1]} />
+        </mesh>
       </group>
       {/* 3 */}
       <group position={[-2.731, 0.629, -0.522]} rotation={[0, 1.087, 0]}>
@@ -252,7 +354,9 @@ const Computer: React.FC<computerGroup> = ({ setting, setInfo, ...props }) => {
           receiveShadow
           geometry={nodes.Object_213.geometry}
           material={materials.Screen}
-        />
+        >
+          <meshBasicMaterial map={videoTexture![2]} />
+        </mesh>
       </group>
       {/* 4 */}
       <group position={[1.845, 0.377, -1.771]} rotation={[0, -Math.PI / 9, 0]}>
@@ -269,7 +373,9 @@ const Computer: React.FC<computerGroup> = ({ setting, setInfo, ...props }) => {
           receiveShadow
           geometry={nodes.Object_216.geometry}
           material={materials.Screen}
-        />
+        >
+          <meshBasicMaterial map={videoTexture![3]} />
+        </mesh>
       </group>
       {/* 5 */}
       <group
@@ -290,7 +396,9 @@ const Computer: React.FC<computerGroup> = ({ setting, setInfo, ...props }) => {
           receiveShadow
           geometry={nodes.Object_219.geometry}
           material={materials.Screen}
-        />
+        >
+          <meshBasicMaterial map={videoTexture![4]} />
+        </mesh>
       </group>
       {/* 6 */}
       <group
@@ -311,7 +419,9 @@ const Computer: React.FC<computerGroup> = ({ setting, setInfo, ...props }) => {
           receiveShadow
           geometry={nodes.Object_222.geometry}
           material={materials.Screen}
-        />
+        >
+          <meshBasicMaterial map={videoTexture![5]} />
+        </mesh>
       </group>
       {/* 7 */}
       <group position={[-3.899, 4.287, -2.642]} rotation={[0, 0.539, 0]}>
@@ -328,7 +438,9 @@ const Computer: React.FC<computerGroup> = ({ setting, setInfo, ...props }) => {
           receiveShadow
           geometry={nodes.Object_225.geometry}
           material={materials.Screen}
-        />
+        >
+          <meshBasicMaterial map={videoTexture![6]} />
+        </mesh>
       </group>
       {/* 8 */}
       <group
@@ -347,9 +459,12 @@ const Computer: React.FC<computerGroup> = ({ setting, setInfo, ...props }) => {
           ref={screenRef}
           castShadow
           receiveShadow
-          geometry={nodes.Object_228.geometry}
+          geometry={nodes.Object_225.geometry}
           material={materials.Screen}
-        />
+          rotation={[0, 0.52, 0]}
+        >
+          <meshBasicMaterial map={videoTexture![7]} />
+        </mesh>
       </group>
       {/* 9 */}
       <group position={[4.683, 4.29, -1.558]} rotation={[0, -Math.PI / 3, 0]}>
@@ -366,7 +481,9 @@ const Computer: React.FC<computerGroup> = ({ setting, setInfo, ...props }) => {
           receiveShadow
           geometry={nodes.Object_231.geometry}
           material={materials.Screen}
-        />
+        >
+          <meshBasicMaterial map={videoTexture![8]} />
+        </mesh>
       </group>
 
       <mesh

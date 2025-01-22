@@ -11,8 +11,11 @@ const Canvas = dynamic(
 )
 const RobotPink = dynamic(() => import("@/models/RoboxPink"), { ssr: false })
 const Page = () => {
+  // 動畫狀態
   const [sayHi, setSayHi] = useState(false)
+  // 滾動狀態
   const [scrollY, setScrollY] = useState(0)
+  // 滾動高度
   const handleScroll = function (e: React.UIEvent<HTMLDivElement>) {
     const scrollPosition = e.currentTarget.scrollTop
     setScrollY(scrollPosition)

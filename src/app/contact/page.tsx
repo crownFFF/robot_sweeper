@@ -13,27 +13,41 @@ const Canvas = dynamic(
 const Car = dynamic(() => import("@/models/Car"), { ssr: false })
 
 const Page = () => {
+  // 綁定表單
   const formRef = useRef(null)
+  // 控制初始值
   const [value, setValue] = useState({ name: "", email: "", message: "" })
+  // 控制模型動畫
   const [currentAnimation, setCurrentAnimation] = useState("Static Pose")
+  // 送出加載控制
   const [isLoading, setIsLoading] = useState(false)
+  // 提示彈窗
   const { alert, showAlert, hideAlert } = useAlert()
-
+  // 表單輸入綁定
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setValue({ ...value, [e.target.name]: e.target.value })
   }
+  // 表單focus
   const handleFocus = () => {
+    // 模型動畫
     setCurrentAnimation("Idle.2")
   }
+  // 表單Blur
   const handleBlur = () => {
+    // 模型動畫
     setCurrentAnimation("Static Pose")
   }
+  // 表單送出
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    // 阻止默認
     e.preventDefault()
+    // 加載控制
     setIsLoading(true)
+    // 模型動畫
     setCurrentAnimation("Arranque")
+    // email組件
     emailjs
       .send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID as string,
@@ -57,7 +71,6 @@ const Page = () => {
       })
       .catch((error) => {
         showAlert({ show: true, type: "danger" })
-
         setCurrentAnimation("Static Pose")
         console.error(error)
       })
