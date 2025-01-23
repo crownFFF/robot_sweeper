@@ -1,7 +1,120 @@
 section {
+  width: 100%;
   &.projectPage {
-    display: flex;
+    padding-top: 6rem;
+    height: 100vh;
+    position: relative;
+    .pro_list {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 8rem 6rem;
+      width: 100%;
+      max-height: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      overflow-y: scroll;
+      .por_item {
+        height: 15rem;
+        border: 0.25rem solid #fff;
+        box-sizing: content-box;
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+        gap: 1rem;
+        background: #0000004d;
+        backdrop-filter: blur(0.2rem);
+        .pro_img {
+          width: 40%;
+          height: 50%;
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+        .pro_info {
+          width: 60%;
+          height: 100%;
+          color: #fff;
+          overflow-y: scroll;
+          position: relative;
+          div {
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            border-bottom: 0.15rem solid #ffffff4d;
+            &:last-child {
+              border: none;
+            }
+            &.title {
+              font-size: 1.5rem;
+            }
+            &.content {
+              font-size: 0.95rem;
+              a {
+                color: #006ae2;
+              }
+            }
+            &.href {
+              font-size: 0.95rem;
+              color: #006ae2;
+              text-decoration: underline;
+              z-index: 1;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
-@media (max-width: 768px) {}
+@media (max-width: 1200px) {
+  section {
+    &.projectPage {
+      .pro_list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+}
+@media (max-width: 1000px) {
+  section {
+    &.projectPage {
+      .pro_list {
+        .por_item {
+          flex-direction: column;
+          .pro_info {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  section {
+    &.projectPage {
+      .pro_list {
+        grid-template-columns: repeat(1, 1fr);
+        .por_item {
+          flex-direction:row;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 460px) {
+  section {
+    &.projectPage {
+      .pro_list {
+        .por_item {
+          flex-direction: column;
+          .pro_info {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

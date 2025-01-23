@@ -180,3 +180,22 @@ export interface AlertProps {
   show: boolean
   type: string
 }
+export type cityResult = GLTF & {
+  nodes: {
+    vents004_0: THREE.Mesh
+    vents004_0_1: THREE.Mesh
+    vents004_0_2: THREE.Mesh
+    vents004_0_3: THREE.Mesh
+    vents004_0_4: THREE.Mesh
+    vents004_1: THREE.Mesh
+    vents004_1_1: THREE.Mesh
+    vents004_1_2: THREE.Mesh
+    vents004_1_3: THREE.Mesh
+    vents004_1_4: THREE.Mesh
+    vents004_1_5: THREE.Mesh
+  }
+  materials: {
+    Vents: THREE.MeshStandardMaterial
+    Boxes: THREE.MeshStandardMaterial
+  }
+}
