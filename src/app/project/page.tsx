@@ -23,8 +23,8 @@ const Page = () => {
     demoProject.project.ready.then(() =>
       demoProject.sequence.play({
         iterationCount: Infinity,
-        range: [0, 7],
-        rate: 0.5,
+        range: [0, 19],
+        rate: 1,
       })
     )
   }, [])
@@ -67,7 +67,6 @@ const Page = () => {
             </div>
           </div>
         </div>
-
         <div className="por_item">
           <div className="pro_img">
             <Image
@@ -100,7 +99,6 @@ const Page = () => {
             </div>
           </div>
         </div>
-
         <div className="por_item">
           <div className="pro_img">
             <Image
@@ -152,7 +150,6 @@ const Page = () => {
             </div>
           </div>
         </div>
-
         <div className="por_item">
           <div className="pro_img">
             <Image
@@ -176,8 +173,8 @@ const Page = () => {
             </div>
             <div className="content">
               <p>使用next建構的3D個人網站</p>
-              <p>以3D模型以及3D動畫的方式呈現個人資訊</p>
-              <p></p>
+              <p>以THREE.js呈現3D模型</p>
+              <p>以及使用Theatre.js製作3D動畫</p>
             </div>
             <div className="href">
               <a href="https://robot-sweeper.vercel.app/" target="_blank">
