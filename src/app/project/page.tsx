@@ -13,10 +13,15 @@ import { PerspectiveCamera } from "@theatre/r3f"
 import cityState from "@/assets/states/cityState.json"
 import "@/app/project/project.scss"
 import Image from "next/image"
+import studio from "@theatre/studio"
+import r3fExtension from "@theatre/r3f/dist/extension"
 
 const demoProject = getProject("demoProject", { state: cityState }).sheet(
   "demoSheet"
 )
+
+// studio.initialize()
+// studio.extend(r3fExtension)
 
 const Page = () => {
   useEffect(() => {
@@ -48,7 +53,7 @@ const Page = () => {
       <div className="pro_list">
         <div className="por_item">
           <div className="pro_img">
-            <Image src="/TS.png" alt="TS" width="100" height="100" priority />
+            <Image src="/images/TS.png" alt="TS" width="100" height="100" priority />
           </div>
           <div className="pro_info">
             <div className="title">TypeScript Learn</div>
@@ -70,7 +75,7 @@ const Page = () => {
         <div className="por_item">
           <div className="pro_img">
             <Image
-              src="/dashboard.png"
+              src="/images/dashboard.png"
               alt="dashboard"
               width="100"
               height="100"
@@ -102,7 +107,7 @@ const Page = () => {
         <div className="por_item">
           <div className="pro_img">
             <Image
-              src="/island.png"
+              src="/images/island.png"
               alt="Island"
               width="100"
               height="100"
@@ -153,7 +158,7 @@ const Page = () => {
         <div className="por_item">
           <div className="pro_img">
             <Image
-              src="/robot.png"
+              src="/images/robot.png"
               alt="robot"
               width="100"
               height="100"
