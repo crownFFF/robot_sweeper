@@ -13,8 +13,7 @@ import { PerspectiveCamera } from "@theatre/r3f"
 import cityState from "@/assets/states/cityState.json"
 import "@/app/project/project.scss"
 import Image from "next/image"
-import studio from "@theatre/studio"
-import r3fExtension from "@theatre/r3f/dist/extension"
+
 
 const demoProject = getProject("demoProject", { state: cityState }).sheet(
   "demoSheet"
