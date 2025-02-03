@@ -1,3 +1,4 @@
+import Image from "next/image"
 export const skills = [
   {
     id: 1,
@@ -66,16 +67,45 @@ export const list = [
     title: "About Me",
     content: (
       <div>
-        <div className="myImg"></div>
+        <div className="myImg">
+          <Image
+            src="/images/myPhoto.png"
+            alt=""
+            width="500"
+            height="643"
+            priority
+          />
+        </div>
         <div className="personInfo">
-          <p>姓名:</p>
-          <p>性別:</p>
-          <p>聯絡方式:</p>
-          <p>E-mail:</p>
-          <p>工作:</p>
-          <p>個人簡介:</p>
-          <p>個人特色:</p>
-          <p>個人連結:</p>
+          <p>
+            姓名:<span>黃冠樺</span>
+          </p>
+          <p>
+            性別:<span>男</span>
+          </p>
+          <p>
+            聯絡方式:<span>0963510598</span>
+          </p>
+          <p>
+            E-mail:
+            <span>
+              <a href="mailto:asd8792323@gmail.com">asd8792323@gmail.com</a>
+            </span>
+          </p>
+          <p>
+            工作:<span>前端工程師</span>
+          </p>
+          <p>
+            個人特色:<span>學習力佳,積極向上,善於溝通,持續學習</span>
+          </p>
+          <p>
+            個人連結:
+            <span>
+              <a href="https://github.com/crownFFF" target="_blank">
+                https://github.com/crownFFF
+              </a>
+            </span>
+          </p>
         </div>
       </div>
     ),
@@ -84,72 +114,300 @@ export const list = [
     id: 2,
     title: "Learning Experience",
     content: (
-        <div>
-          {/* content: '描述自己的學習經歷，包括教育背景和重要課程。' */}
+      <div>
+        {/* content: '描述自己的學習經歷，包括教育背景和重要課程。' */}
+        <div className="personInfo">
+          <p>
+            學校名稱:<span>勞動部動力發展屬中彰投分署</span>
+          </p>
+          <p>
+            就學狀態:<span>畢業</span>
+          </p>
+          <p>
+            學校地區:
+            <span>台灣</span>
+          </p>
+          <p>
+            入學時間:<span>2023-12</span>
+          </p>
+          <p>
+            離校時間:<span>2024-06</span>
+          </p>
+          <p>
+            班級:<span>電子商務網站建置班</span>
+          </p>
         </div>
-      ),
+        <hr />
+        <div className="personInfo">
+          <p>
+            學校名稱:<span>中臺科技大學</span>
+          </p>
+          <p>
+            學歷:<span>四技</span>
+          </p>
+          <p>
+            就學狀態:<span>畢業</span>
+          </p>
+          <p>
+            學校地區:
+            <span>台灣</span>
+          </p>
+          <p>
+            入學時間:<span>2017-09</span>
+          </p>
+          <p>
+            離校時間:<span>2021-06</span>
+          </p>
+          <p>
+            科系:<span>牙體技術暨材料系</span>
+          </p>
+        </div>
+        <hr />
+        <div className="personInfo">
+          <p>
+            學校名稱:<span>私立僑泰高中</span>
+          </p>
+          <p>
+            學歷:<span>高中</span>
+          </p>
+          <p>
+            就學狀態:<span>畢業</span>
+          </p>
+          <p>
+            學校地區:
+            <span>台灣</span>
+          </p>
+          <p>
+            入學時間:<span>2014-09</span>
+          </p>
+          <p>
+            離校時間:<span>2017-06</span>
+          </p>
+          <p>
+            科系:<span>多媒體設計科</span>
+          </p>
+        </div>
+      </div>
+    ),
   },
   {
     id: 3,
     title: "Work Experience",
-        content: (
-        <div>
-          {/* content: '列出過往的工作經驗，包括職位、公司名稱和主要貢獻' */}
+    content: (
+      <div>
+        {/* content: '列出過往的工作經驗，包括職位、公司名稱和主要貢獻' */}
+        <div className="personInfo">
+          <p>
+            公司名稱:<span>蛙設計文創工作室</span>
+          </p>
+          <p>
+            產業類別:<span>網際網路相關業</span>
+          </p>
+          <p>
+            工作地點:<span>台中市西區</span>
+          </p>
+          <p>
+            職務名稱:<span>前端工程師</span>
+          </p>
+          <p>
+            任職日期:<span>2024-09</span>
+          </p>
+          <p>
+            離職日期:<span>仍在職</span>
+          </p>
+          <p>
+            工作描述:
+            <span>
+              <ul>
+                <li>網頁架構與修改維護、前端動態效果呈現</li>
+                <li>與視覺設計師合作,進行前端網頁設計</li>
+                <li>發展前端動態互動及UIUX呈現</li>
+              </ul>
+            </span>
+          </p>
+          <p>
+            工作技能:
+            <span>
+              <ul>
+                <li>HTML、CSS(SACC/SCSS)網頁切版作業</li>
+                <li>RWD網頁設計</li>
+                <li>Git版控協作概念</li>
+              </ul>
+            </span>
+          </p>
         </div>
-      ),
+        <hr />
+        <div className="personInfo">
+          <p>
+            公司名稱:<span>勞動部勞動力發展署中彰投分署</span>
+          </p>
+          <p>
+            產業類別:<span>政府</span>
+          </p>
+          <p>
+            工作地點:<span>台中市西屯區</span>
+          </p>
+          <p>
+            職務名稱:<span>學生</span>
+          </p>
+          <p>
+            任職日期:<span>2023-12</span>
+          </p>
+          <p>
+            離職日期:<span>2024-06</span>
+          </p>
+          <p>
+            學習描述:
+            <span>
+              <ul>
+                <li>學習前、後端網站建設基礎</li>
+                <li>學習PS、AI影像處理軟體</li>
+                <li>Figma圓形設計工具學習</li>
+                <li>Vscode、Dreamweave原始碼編輯器學習</li>
+              </ul>
+            </span>
+          </p>
+        </div>
+        <hr />
+        <div className="personInfo">
+          <p>
+            公司名稱:<span>寶雅國際股份有限公司</span>
+          </p>
+          <p>
+            產業類別:<span>百貨相關業</span>
+          </p>
+          <p>
+            工作地點:<span>台中市大里區</span>
+          </p>
+          <p>
+            職務名稱:<span>儲備幹部</span>
+          </p>
+          <p>
+            職務性質:<span>全職</span>
+          </p>
+          <p>
+            任職日期:<span>2023-07</span>
+          </p>
+          <p>
+            離職日期:<span>2023-11</span>
+          </p>
+          <p>
+            工作描述:
+            <span>
+              <ul>
+                <li>部門商品管理、陳列</li>
+                <li>商品訂購</li>
+                <li>賣場商品調整</li>
+                <li>顧客服務及調解客戶問題反映</li>
+              </ul>
+            </span>
+          </p>
+          <p>
+            工作技能:
+            <span>
+              <ul>
+                <li>客戶服務</li>
+                <li>賣場管理</li>
+              </ul>
+            </span>
+          </p>
+        </div>
+        <hr />
+        <div className="personInfo">
+          <p>
+            公司名稱:<span>朱比特牙體技術所</span>
+          </p>
+          <p>
+            公司規模:<span>1-30人</span>
+          </p>
+          <p>
+            產業類別:<span>其他醫療保健服務業</span>
+          </p>
+          <p>
+            工作地點:<span>台中市南區</span>
+          </p>
+          <p>
+            職務名稱:<span>牙體技術師</span>
+          </p>
+          <p>
+            職務性質:<span>全職</span>
+          </p>
+          <p>
+            任職日期:<span>2021-09</span>
+          </p>
+          <p>
+            離職日期:<span>2023-06</span>
+          </p>
+          <p>
+            工作描述:
+            <span>
+              <ul>
+                <li>隱形牙套設計、生成、製造</li>
+                <li>管理及保養3D列印機</li>
+                <li>與醫師客戶溝通、協調產品內容</li>
+              </ul>
+            </span>
+          </p>
+          <p>
+            工作技能:
+            <span>
+              <ul>
+                <li>隱形校正</li>
+                <li>3shape</li>
+                <li>3D列印</li>
+              </ul>
+            </span>
+          </p>
+        </div>
+      </div>
+    ),
   },
   {
     id: 4,
     title: "Projects",
-        content: (
-        <div>
-          {/* content: '介紹曾經參與的專案，強調自己在專案中的角色和成就' */}
-        </div>
-      ),
+    content: (
+      <div>
+        {/* content: '介紹曾經參與的專案，強調自己在專案中的角色和成就' */}
+      </div>
+    ),
   },
   {
     id: 5,
     title: "Licenses",
-        content: (
-        <div>
-          {/* content: '列出獲得的證照或專業認證，例如 PMP、AWS 等' */}
-        </div>
-      ),
+    content: (
+      <div>
+        {/* content: '列出獲得的證照或專業認證，例如 PMP、AWS 等' */}
+      </div>
+    ),
   },
   {
     id: 6,
     title: "Personal Statement",
-        content: (
-        <div>
-          {/* content: '撰寫個人陳述，說明自己的職業目標和價值觀。' */}
-        </div>
-      ),
+    content: (
+      <div>{/* content: '撰寫個人陳述，說明自己的職業目標和價值觀。' */}</div>
+    ),
   },
   {
     id: 7,
     title: "Skills",
-        content: (
-        <div>
-          {/* content: '列出自己的技能樹，例如程式語言、工具或軟技能' */}
-        </div>
-      ),
+    content: (
+      <div>{/* content: '列出自己的技能樹，例如程式語言、工具或軟技能' */}</div>
+    ),
   },
   {
     id: 8,
     title: "Future Expectations",
-        content: (
-        <div>
-          {/* content: '說明未來的期望，例如職涯規劃或希望參與的項目類型' */}
-        </div>
-      ),
+    content: (
+      <div>
+        {/* content: '說明未來的期望，例如職涯規劃或希望參與的項目類型' */}
+      </div>
+    ),
   },
   {
     id: 9,
     title: "Copyright",
-        content: (
-        <div>
-          {/* content: '補充版權資訊，例如個人作品的版權聲明。' */}
-        </div>
-      ),
+    content: (
+      <div>{/* content: '補充版權資訊，例如個人作品的版權聲明。' */}</div>
+    ),
   },
 ]
