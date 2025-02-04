@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 export const skills = [
   {
     id: 1,
@@ -215,7 +216,7 @@ export const list = [
           <p>
             離職日期:<span>仍在職</span>
           </p>
-          <p>
+          <span>
             工作描述:
             <span>
               <ul>
@@ -224,8 +225,8 @@ export const list = [
                 <li>發展前端動態互動及UIUX呈現</li>
               </ul>
             </span>
-          </p>
-          <p>
+          </span>
+          <span>
             工作技能:
             <span>
               <ul>
@@ -234,7 +235,7 @@ export const list = [
                 <li>Git版控協作概念</li>
               </ul>
             </span>
-          </p>
+          </span>
         </div>
         <hr />
         <div className="personInfo">
@@ -253,10 +254,10 @@ export const list = [
           <p>
             任職日期:<span>2023-12</span>
           </p>
-          <p>
+          <span>
             離職日期:<span>2024-06</span>
-          </p>
-          <p>
+          </span>
+          <span>
             學習描述:
             <span>
               <ul>
@@ -266,7 +267,7 @@ export const list = [
                 <li>Vscode、Dreamweave原始碼編輯器學習</li>
               </ul>
             </span>
-          </p>
+          </span>
         </div>
         <hr />
         <div className="personInfo">
@@ -291,7 +292,7 @@ export const list = [
           <p>
             離職日期:<span>2023-11</span>
           </p>
-          <p>
+          <span>
             工作描述:
             <span>
               <ul>
@@ -301,8 +302,8 @@ export const list = [
                 <li>顧客服務及調解客戶問題反映</li>
               </ul>
             </span>
-          </p>
-          <p>
+          </span>
+          <span>
             工作技能:
             <span>
               <ul>
@@ -310,7 +311,7 @@ export const list = [
                 <li>賣場管理</li>
               </ul>
             </span>
-          </p>
+          </span>
         </div>
         <hr />
         <div className="personInfo">
@@ -338,7 +339,7 @@ export const list = [
           <p>
             離職日期:<span>2023-06</span>
           </p>
-          <p>
+          <span>
             工作描述:
             <span>
               <ul>
@@ -347,8 +348,8 @@ export const list = [
                 <li>與醫師客戶溝通、協調產品內容</li>
               </ul>
             </span>
-          </p>
-          <p>
+          </span>
+          <span>
             工作技能:
             <span>
               <ul>
@@ -357,7 +358,7 @@ export const list = [
                 <li>3D列印</li>
               </ul>
             </span>
-          </p>
+          </span>
         </div>
       </div>
     ),
@@ -368,15 +369,187 @@ export const list = [
     content: (
       <div>
         {/* content: '介紹曾經參與的專案，強調自己在專案中的角色和成就' */}
+        <div className="personInfo">
+          <p>
+            作品名稱:<span>Robot-個人資訊網站</span>
+          </p>
+          <span>
+            使用技術:
+            <span>
+              <ul className="skillList">
+                <li>react</li>
+                <li>next.js</li>
+                <li>three.js</li>
+                <li>Theatre.js</li>
+                <li>TypeScript</li>
+                <li>R3F</li>
+                <li>SCSS</li>
+              </ul>
+            </span>
+          </span>
+          <p>
+            內容說明:
+            <span>
+              使用next建構的3D個人網站
+              <br />
+              以THREE.js呈現3D模型
+              <br />
+              以及使用Theatre.js製作3D動畫
+            </span>
+          </p>
+          <p>
+            <Link href="/project">詳細內容請至PROJECT頁面</Link>
+          </p>
+        </div>
+        <hr />
+        <div className="personInfo">
+          <p>
+            作品名稱:<span>Three_Island</span>
+          </p>
+          <span>
+            使用技術:
+            <span>
+              <ul className="skillList">
+                <li>react</li>
+                <li>three.js</li>
+                <li>TypeScript</li>
+                <li>R3F</li>
+                <li>SCSS</li>
+                <li>Tailwind</li>
+                <li>next.js</li>
+              </ul>
+            </span>
+          </span>
+          <p>
+            內容說明:
+            <span>
+              使用next框架建構的3D網站
+              <br />
+              此網站為根據Youtube教學製作而成素材網址
+              <br />
+              此網站設置滑鼠點擊以及鍵盤左右按鍵功能
+              <br />
+              控制模型的動畫以及旋轉
+            </span>
+          </p>
+          <p>
+            <Link href="/project">詳細內容請至PROJECT頁面</Link>
+          </p>
+        </div>
+        <hr />
+        <div className="personInfo">
+          <p>
+            作品名稱:<span>DashBoard</span>
+          </p>
+          <span>
+            使用技術:
+            <span>
+              <ul className="skillList">
+                <li>react</li>
+                <li>next.js</li>
+                <li>TypeScript</li>
+              </ul>
+            </span>
+          </span>
+          <p>
+            內容說明:
+            <span>
+              next官方網站的學習內容
+              <br />
+              跟著官方學習手冊建構而成的儀表板網站
+              <br />
+              學習next基礎以及與資料庫連結
+            </span>
+          </p>
+          <p>
+            <Link href="/project">詳細內容請至PROJECT頁面</Link>
+          </p>
+        </div>
+        <hr />
+        <div className="personInfo">
+          <p>
+            作品名稱:<span>TypeScript Learn</span>
+          </p>
+          <span>
+            使用技術:
+            <span>
+              <ul className="skillList">
+                <li>TypeScript</li>
+                <li>MarkDown</li>
+              </ul>
+            </span>
+          </span>
+          <p>
+            內容說明:
+            <span>
+              TypeScript的學習筆記記錄從零開始學習TypeScript的過程整理成MarkDown筆記
+            </span>
+          </p>
+          <p>
+            <Link href="/project">詳細內容請至PROJECT頁面</Link>
+          </p>
+        </div>
+        <hr />
+        <div className="personInfo">
+          <p>
+            作品名稱:<span>Figma-GABI</span>
+          </p>
+          <span>
+            使用技術:
+            <span>
+              <ul className="skillList">
+                <li>Figma</li>
+              </ul>
+            </span>
+          </span>
+          <p>
+            內容說明:
+            <span>
+              運用Figma模擬咖啡餐館官網設計,內建模擬網站元件,模擬展現出實際網站效果
+            </span>
+          </p>
+          <p>
+            <Link href="/project">詳細內容請至PROJECT頁面</Link>
+          </p>
+        </div>
       </div>
     ),
   },
   {
     id: 5,
-    title: "Licenses",
+    title: "Licenses & Language",
     content: (
       <div>
         {/* content: '列出獲得的證照或專業認證，例如 PMP、AWS 等' */}
+        <div className="personInfo">
+          <p>
+            國家考試:<span>牙體技術師</span>
+          </p>
+          <span>
+            證照:
+            <span>
+              <ul>
+                <li>丙級印前製程技術士-圖文組板</li>
+                <li>丙級視覺傳達設計技術士</li>
+                <li>丙級網頁設計技術士</li>
+                <li>乙級印前製程技術士</li>
+              </ul>
+            </span>
+          </span>
+        </div>
+        <hr />
+        <div className="personInfo">
+          <span>
+            語言:
+            <span>
+              <ul>
+                <li>中文</li>
+                <li>英文</li>
+                <li>台語</li>
+              </ul>
+            </span>
+          </span>
+        </div>
       </div>
     ),
   },
@@ -391,7 +564,71 @@ export const list = [
     id: 7,
     title: "Skills",
     content: (
-      <div>{/* content: '列出自己的技能樹，例如程式語言、工具或軟技能' */}</div>
+      <div>
+        {/* content: '列出自己的技能樹，例如程式語言、工具或軟技能' */}
+        <div className="personInfo">
+          <span>
+            技術類:
+            <span>
+              <ul className="skillList">
+                <li>HTML</li>
+                <li>CSS / SCSS</li>
+                <li>JavaSctipt / TypeScript</li>
+                <li>AJAX</li>
+                <li>PHP</li>
+                <li>MySQL</li>
+                <li>Figma</li>
+              </ul>
+            </span>
+          </span>
+          <hr />
+          <span>
+            前端框架類:
+            <span>
+              <ul className="skillList">
+                <li>Vue</li>
+                <li>React</li>
+                <li>Astro</li>
+                <li>Next</li>
+                <li>Vite</li>
+              </ul>
+            </span>
+          </span>
+          <hr />
+          <span>
+            應用類:
+            <span>
+              <ul className="skillList">
+                <li>Git</li>
+                <li>Word</li>
+                <li>Excel</li>
+                <li>PowerPoint</li>
+              </ul>
+            </span>
+          </span>
+          <hr />
+          <span>
+            影像向量處理類:
+            <span>
+              <ul className="skillList">
+                <li>PhotoShop</li>
+                <li>PhotoImpact</li>
+                <li>Illustrator</li>
+              </ul>
+            </span>
+          </span>
+          <hr />
+          <span>
+            3D類:
+            <span>
+              <ul className="skillList">
+                <li>Blender</li>
+                <li>THREE.js</li>
+              </ul>
+            </span>
+          </span>
+        </div>
+      </div>
     ),
   },
   {
@@ -407,7 +644,23 @@ export const list = [
     id: 9,
     title: "Copyright",
     content: (
-      <div>{/* content: '補充版權資訊，例如個人作品的版權聲明。' */}</div>
+      <div>
+        {/* content: '補充版權資訊，例如個人作品的版權聲明。' */}
+        <div className="personInfo">
+          3D 模型來源於Sketchfab網站
+          <br />
+          並遵循其授權協議和使用條款
+          <br />
+          模型僅用於非商業用途（如展示、學習、研究等）
+          <br />
+          Sketchfab網站及其作者對模型擁有完整的知識產權。本網站不對模型的原創性、準確性或適用性承擔責任。
+          <br />
+          若在使用過程中侵犯到您的權益，請通過
+          <Link href="/contact">聯繫郵箱</Link>
+          與我聯繫，我將在收到通知後立即移除相關內容。
+          <br />
+        </div>
+      </div>
     ),
   },
 ]

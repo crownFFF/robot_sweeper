@@ -52,11 +52,33 @@ const Page = () => {
             <h1>
               <span className="title">Hi ! </span>
               <br />I am <span className="name">Tony!</span> Nice to meet you!
-              <br /> This is my Three.js and Next.js Work
+              <br /> This is my Personal Introduction Web
             </h1>
             <button onClick={() => setSayHi(!sayHi)}>
               {!sayHi ? "Say Hi!!!" : "Stop"}
             </button>
+          </div>
+          <div className="card">
+            <h1>
+              <span className="title">About Web</span>
+              <br />
+              這個網站主要用於個人履歷介紹網站,此網站結合3D模型以及3D動畫製作而成。
+              <br />
+              會使用3D模型進行設計的原因是我想試著把網站的互動性提高,不再局限於平面2D的動畫。
+              <br />
+              使用3D模型並試著融合NEXT前端框件進行設計,一方面提高對於模型在網頁上的應用,一方面練習對於前端框架的運用。
+              <br />
+              由於我對於3D模型建模還在學習階段,
+              <br />
+              所以此網頁的模型都是在Sketchfab網站上所下載運用的。
+              <br />
+              未來期許自己能夠將自己創作的模型運用到網頁中,並提高對於3D網站的互動體驗
+              <br />
+              <br />
+              感謝您瀏覽此網站!
+              <br />
+              若有任何疑問可以通過<Link href='/contact'>Email</Link>與我聯繫
+            </h1>
           </div>
           <div className="card flex-col">
             <h1 className="title">SKILLS</h1>
@@ -69,25 +91,6 @@ const Page = () => {
                 </div>
               ))}
             </div>
-          </div>
-          <div className="card  flex-col">
-            <h1 className="title">模型引用</h1>
-            <h1>
-              3D 模型來源於
-              <Link href="https://sketchfab.com/Yandrack" target="_blank">
-                Sketchfab 作者:Yandrack
-              </Link>
-              <br /> 並遵循其授權協議和使用條款
-            </h1>
-            <h1>模型僅用於非商業用途（如展示、學習、研究等）</h1>
-            <h1>
-              Sketchfab網站或原作者Yandrack對模型擁有完整的知識產權。本網站不對模型的原創性、準確性或適用性承擔責任。
-            </h1>
-            <h1>
-              若在使用過程中侵犯到您的權益，請通過{" "}
-              <Link href="mailto:asd8792323@gmail.com">聯繫郵箱</Link>{" "}
-              與我聯繫，我將在收到通知後立即移除相關內容。
-            </h1>
           </div>
         </div>
       </div>

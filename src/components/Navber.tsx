@@ -20,7 +20,6 @@ const Navber = () => {
           <Link href="./about">ABOUT</Link>
           <Link href="./contact">CONTACT</Link>
           <Link href="./project">PROJECT</Link>
-          <Link href="./notfound">NOT-FOUND</Link>
         </nav>
       </section>
     </header>

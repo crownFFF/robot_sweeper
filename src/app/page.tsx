@@ -87,13 +87,12 @@ export default function Home() {
             </button>
           </h1>
           {isShow && (
-            <div className="content">
-              {list[info.number - 1].content}
-            </div>
+            <div className="content">{list[info.number - 1].content}</div>
           )}
           <div className="remind">點擊螢幕關閉...</div>
         </div>
       )}
+      {!info.show && <div className="clickScreen">請點擊螢幕...</div>}
     </section>
   )
 }

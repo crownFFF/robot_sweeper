@@ -187,7 +187,33 @@ const Page = () => {
             </div>
           </div>
         </div>
-        <div className="por_item"></div>
+        <div className="por_item">
+        <div className="pro_img">
+            <Image
+              src="/images/coffee.png"
+              alt="robot"
+              width="100"
+              height="100"
+              priority
+            />
+          </div>
+          <div className="pro_info">
+            <div className="title">Figma-GABI</div>
+            <div className="skill">
+              <p>Figma</p>
+            </div>
+            <div className="content">
+              <p>運用Figma模擬咖啡餐館官網設計</p>
+              <p>內建模擬網站元件</p>
+              <p>模擬展現出實際網站效果</p>
+            </div>
+            <div className="href">
+              <a href="https://www.figma.com/proto/Q2bVkkDjaYydbpU1ESDUpK/coffee?" target="_blank">
+                網址連結
+              </a>
+            </div>
+          </div>
+        </div>
         <div className="por_item"></div>
         <div className="por_item"></div>
         <div className="por_item"></div>
