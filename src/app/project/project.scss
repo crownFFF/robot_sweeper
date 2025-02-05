@@ -96,6 +96,7 @@ section {
   section {
     &.projectPage {
       .pro_list {
+        padding: 8rem 4rem;
         grid-template-columns: repeat(1, 1fr);
         .por_item {
           flex-direction:row;
@@ -108,6 +109,7 @@ section {
   section {
     &.projectPage {
       .pro_list {
+        padding: 8rem 3rem;
         .por_item {
           flex-direction: column;
           .pro_info {

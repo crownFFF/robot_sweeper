@@ -1,7 +1,7 @@
 "use client"
 import * as THREE from "three"
 import Loading from "@/components/Loading"
-import React, { Suspense, useEffect, useState } from "react"
+import React, { Suspense, useEffect, useState, useRef } from "react"
 import { list } from "@/constants"
 import dynamic from "next/dynamic"
 import { Info } from "@/lib"
@@ -27,6 +27,9 @@ export default function Home() {
     position: new THREE.Vector3(0, 0, 2.5),
     fov: 100,
   })
+  // 控制音樂
+  const [playMusic, setPlayMusic] = useState(false)
+  const music = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
     // 螢幕寬高設定
@@ -52,11 +55,25 @@ export default function Home() {
     handleResize()
     // 監聽
     window.addEventListener("resize", handleResize)
+
+    // 音樂設定
+    music.current = new Audio("/Noise.mp3")
+    music.current.volume = 1
+    music.current.loop = true
     return () => {
       // 釋放資源
       window.removeEventListener("resize", handleResize)
     }
   }, [])
+
+  useEffect(() => {
+    if (playMusic) {
+      music.current!.play()
+    }
+    return () => {
+      music.current!.pause()
+    }
+  }, [playMusic])
 
   return (
     <section className="homePage">
@@ -93,6 +110,12 @@ export default function Home() {
         </div>
       )}
       {!info.show && <div className="clickScreen">請點擊螢幕...</div>}
+      <button
+        className={`musicBtn ${playMusic ? "" : "pause"}`}
+        onClick={() => {
+          setPlayMusic(!playMusic)
+        }}
+      ></button>
     </section>
   )
 }

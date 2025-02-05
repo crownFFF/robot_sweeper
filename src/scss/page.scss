@@ -51,7 +51,7 @@ section {
             a {
               color: #006ae2;
             }
-            span{
+            span {
               width: 75%;
               text-align: right;
             }
@@ -59,7 +59,7 @@ section {
           ul {
             list-style: none;
             text-align: right;
-            &.skillList{
+            &.skillList {
               color: #cccccc;
             }
           }
@@ -86,7 +86,7 @@ section {
         animation: opacityText 1s linear infinite;
       }
     }
-    .clickScreen{
+    .clickScreen {
       position: absolute;
       color: #fff;
       bottom: 2rem;
@@ -95,6 +95,19 @@ section {
       letter-spacing: 0.5rem;
       font-size: 1rem;
       animation: opacityText 1.5s ease-in-out infinite;
+    }
+    .musicBtn {
+      all: unset;
+      width: 2rem;
+      height: 2rem;
+      background: url("../assets/icons/music.svg") no-repeat center/contain;
+      position: absolute;
+      bottom: 2rem;
+      left: 2.5rem;
+      cursor: pointer;
+      &.pause {
+        background: url("../assets/icons/pause.svg") no-repeat center/contain;
+      }
     }
   }
 }
