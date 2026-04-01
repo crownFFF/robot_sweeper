@@ -1,0 +1,246 @@
+@use "../base/index" as *;
+main {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  article {
+    width: 30%;
+    height: fit-content;
+    max-height: 40rem;
+    background: #3a3a3a;
+    border: 1px solid #fff;
+    @include position(absolute, $t: 1rem, $r: 1rem, $z: 10);
+    padding: 1rem;
+    box-shadow:
+      inset 1px 1px 0 #ff000080,
+      inset -1px -1px 0 #00ffff80;
+    overflow: hidden;
+  }
+  &.home {
+    .remind {
+      font-size: 1.1rem;
+      @include position(absolute, $b: 2rem, $l: 50%);
+      transform: translateX(-50%);
+      letter-spacing: 3px;
+      @include flex($ai: flex-end);
+      &::after {
+        content: "";
+        display: block;
+        width: 1rem;
+        height: 4px;
+        background: #fff;
+        animation: shiny 0.5s linear infinite alternate;
+      }
+    }
+    article {
+      transition:
+        scale 0.15s,
+        filter 0.2s,
+        box-shadow 0.15s;
+      @include noise;
+      &.show {
+        @include flex($ff: column, $g: 1.5);
+        scale: 1 1;
+        filter: blur(0rem);
+        box-shadow: inset 0 0 0rem #fff;
+        @starting-style {
+          scale: 0.5 0;
+          filter: blur(1rem);
+          box-shadow:
+            inset 0 0 1rem 20rem #fff,
+            0 0 1rem 20rem #fff;
+        }
+      }
+      &.hide {
+        scale: 0.5 0;
+        filter: blur(1rem);
+        box-shadow:
+          inset 0 0 1rem 20rem #fff,
+          0 0 1rem 20rem #fff;
+        @starting-style {
+          scale: 1 1;
+          display: none;
+          filter: blur(0rem);
+          box-shadow: inset 0 0 0rem #fff;
+        }
+      }
+      &.column{
+        section{
+          &.content{
+            ul{
+              li{
+                flex-flow: column;
+              }
+            }
+          }
+        }
+      }
+      h1 {
+        font-size: 3.5rem;
+        filter: drop-shadow(2px 2px 0 #ff0000a8)
+          drop-shadow(-2px -2px 0 #00ffffa8);
+        border-bottom: 1px solid #fff;
+        opacity: 0.8;
+      }
+      section {
+        overflow: hidden auto;
+        width: 100%;
+        height: 100%;
+        padding: 1rem;
+        img {
+          width: 60%;
+          height: fit-content;
+          object-fit: contain;
+          align-self: center;
+          margin: 0 auto;
+        }
+        ul {
+          li {
+            @include flex;
+            p {
+              font-family: var(--cubic);
+              font-size: 1.15rem;
+              line-height: 2;
+              @include flex($ff: column);
+              &:first-of-type {
+                width: 20%;
+              }
+            }
+            &:last-of-type {
+              p {
+                &:last-of-type {
+                  @include underLine(1, 4);
+                }
+              }
+            }
+            a {
+              font-size: 1.15rem;
+              line-height: 2;
+              font-family: var(--cubic);
+            }
+          }
+        }
+        &::-webkit-scrollbar {
+          width: 0.5rem;
+        }
+        &::-webkit-scrollbar-thumb {
+          border-radius: 2rem;
+          background: #ffffff80;
+        }
+      }
+    }
+  }
+  &.email {
+    @include noise(true);
+    article {
+      scale: 1 1;
+      filter: blur(0rem);
+      box-shadow: inset 0 0 0rem #fff;
+      transition:
+        scale 0.15s ease-in-out 0.75s,
+        filter 0.2s ease-in-out 0.75s,
+        box-shadow 0.15s ease-in-out 0.75s;
+      @starting-style {
+        scale: 0.5 0;
+        filter: blur(1rem);
+        box-shadow:
+          inset 0 0 1rem 20rem #fff,
+          0 0 1rem 20rem #fff;
+      }
+      form {
+        height: 100%;
+        @include flex($ff: column, $g: 0.5);
+        label {
+          font-size: 2rem;
+          font-weight: bold;
+          filter: drop-shadow(2px 2px 0 #ff0000a8)
+            drop-shadow(-2px -2px 0 #00ffffa8);
+          border-bottom: 1px solid #fff;
+          opacity: 0.8;
+        }
+        input,
+        textarea {
+          width: 100%;
+          line-height: 2;
+          padding: 0 1rem;
+          font-size: 1.2rem;
+          font-family: var(--cubic), Arial, Helvetica, sans-serif;
+          background: #ffffff3a;
+          border: 1px solid #fff;
+          color: #fff;
+        }
+        textarea {
+          height: 15rem;
+        }
+        button {
+          width: fit-content;
+          align-self: center;
+          font-size: 2rem;
+          font-family: var(--bytesized);
+          color: #fff;
+          @include underLine;
+        }
+      }
+    }
+  }
+  &.project {
+    @include noise(true);
+    article {
+      scale: 1 1;
+      filter: blur(0rem);
+      box-shadow: inset 0 0 0rem #fff;
+      transition:
+        scale 0.15s ease-in-out calc(var(--delay) * 0.8s),
+        filter 0.2s ease-in-out calc(var(--delay) * 0.8s),
+        box-shadow 0.15s ease-in-out calc(var(--delay) * 0.8s);
+      top: calc(var(--position) * 3rem);
+      right: calc(var(--position) * 3rem);
+      font-family: var(--cubic), Arial, Helvetica, sans-serif;
+      @starting-style {
+        scale: 0.5 0;
+        filter: blur(1rem);
+        box-shadow:
+          inset 0 0 1rem 20rem #fff,
+          0 0 1rem 20rem #fff;
+      }
+      h1,
+      a {
+        font-size: 3.5rem;
+        filter: drop-shadow(2px 2px 0 #ff0000a8)
+          drop-shadow(-2px -2px 0 #00ffffa8);
+        border-bottom: 1px solid #fff;
+        opacity: 0.8;
+        @include flex($ai: flex-end, $g: 1, $ff: wrap);
+        font-family: var(--bytesized);
+        span {
+          font-size: 1rem;
+          line-height: 2.25;
+        }
+      }
+      img {
+        width: 100%;
+        height: fit-content;
+        object-fit: contain;
+        pointer-events: none;
+      }
+      ul {
+        @include flex($ai: center, $g: 1.25);
+        padding: 1rem 0;
+        li {
+          font-size: 1.2rem;
+          &:last-child {
+            @include underLine;
+          }
+        }
+      }
+      p {
+        font-size: 1.1rem;
+        line-height: 2;
+      }
+      a {
+        justify-content: flex-end;
+        border-bottom: none;
+      }
+    }
+  }
+}

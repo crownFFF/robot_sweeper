@@ -1,0 +1,36 @@
+@use "../base/index" as *;
+
+header {
+  width: 30rem;
+  background: #3a3a3a;
+  font-size: 2.5rem;
+  padding: 1rem 0;
+  border: 1px solid #fff;
+  @include flex($g: 2, $jc: center);
+  @include position(fixed, $t: 2rem, $z: 10);
+  overflow: hidden;
+  box-shadow:
+    inset 1px 1px 0 #ff000080,
+    inset -1px -1px 0 #00ffff80;
+  transition:
+    scale 0.15s ease-in-out 0.5s,
+    filter 0.2s ease-in-out 0.5s,
+    box-shadow 0.15s ease-in-out 0.5s;
+  scale: 1 1;
+  filter: blur(0rem);
+  box-shadow: inset 0 0 0rem #fff;
+  @starting-style {
+    scale: 0.5 0;
+    filter: blur(1rem);
+    box-shadow:
+      inset 0 0 1rem 20rem #fff,
+      0 0 1rem 20rem #fff;
+  }
+  a {
+    touch-action: manipulation;
+  }
+  p {
+    filter: drop-shadow(2px 2px 0 #f00) drop-shadow(-2px -2px 0 #0ff);
+    border-bottom: 1px solid #fff;
+  }
+}

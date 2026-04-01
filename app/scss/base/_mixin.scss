@@ -1,0 +1,116 @@
+// flex layout（新版參數，無設定即不輸出）
+@mixin flex($jc: null, $ai: null, $ff: null, $g: null) {
+  display: flex;
+  @if ($ff != null) {
+    flex-flow: $ff;
+  }
+  @if ($jc != null) {
+    justify-content: $jc;
+  }
+  @if ($ai != null) {
+    align-items: $ai;
+  }
+  @if ($g != null) {
+    gap: #{$g}rem;
+  }
+  @content;
+}
+
+// 文字省略
+@mixin ellipsis($line: 1, $w: 100%) {
+  width: $w;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @if $line != null {
+    @if $line == 1 {
+      // 設為單行省略
+      white-space: nowrap;
+    } @else {
+      // 指定多行省略
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: $line;
+    }
+  }
+}
+
+@mixin position(
+  $p: absolute,
+  $set: null,
+  $t: null,
+  $r: null,
+  $b: null,
+  $l: null,
+  $z: null
+) {
+  position: $p;
+  // 上下左右中定位
+  @if ($set != null) {
+    @if ($set == center) {
+      inset: 50% auto auto 50%;
+      transform: translate(-50%, -50%);
+    } @else if ($set == top) {
+      inset: 0 auto auto 50%;
+      transform: translateX(-50%);
+    } @else if ($set == right) {
+      inset: 50% 0 auto auto;
+      transform: translateY(-50%);
+    } @else if ($set == bottom) {
+      inset: auto auto 0 50%;
+      transform: translateX(-50%);
+    } @else if ($set == left) {
+      inset: 50% auto auto 0;
+      transform: translateY(-50%);
+    }
+  } @else {
+    @if ($t != null) {
+      top: $t;
+    }
+    @if ($r != null) {
+      right: $r;
+    }
+    @if ($b != null) {
+      bottom: $b;
+    }
+    @if ($l != null) {
+      left: $l;
+    }
+  }
+  @if ($z != null) {
+    z-index: $z;
+  }
+  @content;
+}
+
+@mixin underLine($w: 1, $h: 4) {
+  position: relative;
+  &::after {
+    content: "";
+    @include position(absolute, $b: 0, $l: 100%);
+    width: calc($w * 1rem);
+    height: calc($h * 1px);
+    background: #fff;
+    animation: shiny 0.5s linear infinite alternate;
+  }
+}
+@mixin noise($animation: false) {
+  &::after {
+    content: "";
+    width: calc(100% + 5rem);
+    height: calc(100% + 5rem);
+    pointer-events: none;
+    @include position(absolute, $t: -5rem, $l: -5rem, $z: 1);
+    background: repeating-linear-gradient(#111, #111 50%, #fff 50%, #fff)
+      center/5px 5px;
+    filter: url("#noise");
+    @if ($animation) {
+      animation: shiny2
+        2s
+        cubic-bezier(0.03, 0.85, 0.02, 0.09)
+        infinite
+        alternate;
+    } @else {
+      opacity: 0.15;
+    }
+  }
+}
