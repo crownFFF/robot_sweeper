@@ -23,6 +23,7 @@ const RenderContent = ({ content }) => {
 const Card = () => {
   const isFocus = useCameraStore(s => s.isFocus)
   const targetId = useCameraStore(s => s.targetId)
+  const normal = useCameraStore(s => s.normal)
   const list = info[targetId] || "Null"
   const root = useRef(null)
   useDraggable({ root })
@@ -56,6 +57,7 @@ const Card = () => {
             ))}
         </ul>
       </section>
+      <button onClick={normal}><i className="off_ic"/></button>
     </article>
   )
 }

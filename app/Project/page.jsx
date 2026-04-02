@@ -37,6 +37,9 @@ const Project = () => {
     const draggables = cards.map(card =>
       createDraggable(card, {
         container: document.body,
+        cursor:{
+          onGrab:"grabbing"
+        }
       }),
     )
     return () => {
