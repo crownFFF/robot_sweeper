@@ -96,10 +96,10 @@
 @mixin noise($animation: false) {
   &::after {
     content: "";
-    width: calc(100% + 5rem);
-    height: calc(100% + 5rem);
+    width: 150%;
+    height: 150%;
     pointer-events: none;
-    @include position(absolute, $t: -5rem, $l: -5rem, $z: 1);
+    @include position(absolute, $t: -50%, $l: -50%, $z: 1);
     background: repeating-linear-gradient(#111, #111 50%, #fff 50%, #fff)
       center/5px 5px;
     filter: url("#noise");
