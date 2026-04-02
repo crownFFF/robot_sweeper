@@ -4,12 +4,12 @@ main {
   height: 100%;
   position: relative;
   article {
-    width: 30%;
+    width: 40rem;
     height: fit-content;
     max-height: 40rem;
     background: #3a3a3a;
     border: 1px solid #fff;
-    @include position(absolute, $t: 1rem, $r: 1rem, $z: 10);
+    @include position(absolute, $t: 20%, $r: 1rem, $z: 10);
     padding: 1rem;
     box-shadow:
       inset 1px 1px 0 #ff000080,
@@ -64,11 +64,11 @@ main {
           box-shadow: inset 0 0 0rem #fff;
         }
       }
-      &.column{
-        section{
-          &.content{
-            ul{
-              li{
+      &.column {
+        section {
+          &.content {
+            ul {
+              li {
                 flex-flow: column;
               }
             }
@@ -126,6 +126,17 @@ main {
         &::-webkit-scrollbar-thumb {
           border-radius: 2rem;
           background: #ffffff80;
+        }
+      }
+      button {
+        width: fit-content;
+        color: #fff;
+        align-self: center;
+        filter: invert(1) drop-shadow(2px 2px 0 #ff0000a8)
+          drop-shadow(-2px -2px 0 #00ffffa8);
+        i {
+          width: 2rem;
+          height: 2rem;
         }
       }
     }
@@ -202,6 +213,10 @@ main {
         box-shadow:
           inset 0 0 1rem 20rem #fff,
           0 0 1rem 20rem #fff;
+      }
+      @include rwd_down(tablet) {
+        top: calc(var(--position) * 10rem);
+        right: calc(var(--position) * 1.5rem);
       }
       h1,
       a {

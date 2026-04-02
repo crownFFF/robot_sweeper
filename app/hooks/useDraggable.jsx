@@ -16,6 +16,9 @@ const useDraggable = ({ root, target, container }) => {
 
     const draggable = createDraggable(targetElement, {
       container: targetContainer,
+      cursor:{
+        onGrab:"grabbing"
+      }
     })
     return () => {
       draggable?.revert?.()

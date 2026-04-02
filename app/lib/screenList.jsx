@@ -4,46 +4,82 @@ export const screenList = {
     targetId: "screenA",
     position: new THREE.Vector3(-1.25, 0, -0.5),
     lookAt: new THREE.Vector3(-3, -0.25, -1.5),
+    mobile: {
+      position: new THREE.Vector3(-1.25, 0, -0.25),
+      lookAt: new THREE.Vector3(-3.5, -0.25, -1.0),
+    },
   },
   screenB: {
     targetId: "screenB",
     position: new THREE.Vector3(-0.25, 1.75, -0.75),
     lookAt: new THREE.Vector3(-1.75, 1.75, -1.5),
+    mobile: {
+      position: new THREE.Vector3(-0.25, 1.75, -0.5),
+      lookAt: new THREE.Vector3(-1.5, 1.75, -1.5),
+    },
   },
   screenB2: {
     targetId: "screenB2",
     position: new THREE.Vector3(-1.75, 2, 1.75),
     lookAt: new THREE.Vector3(-2.05, 2, 1.5),
+    mobile: {
+      position: new THREE.Vector3(-1.75, 2, 1.75),
+      lookAt: new THREE.Vector3(-2.5, 2, 1.5),
+    },
   },
   screenC: {
     targetId: "screenC",
     position: new THREE.Vector3(-0.25, 0.65, -1.25),
-    lookAt: new THREE.Vector3(-0.20, 0.64, -1.3),
+    lookAt: new THREE.Vector3(-0.2, 0.64, -1.3),
+    mobile: {
+      position: new THREE.Vector3(-0.25, 0.65, -1.25),
+      lookAt: new THREE.Vector3(-0.225, 0.675, -1.3),
+    },
   },
   screenC2: {
     targetId: "screenC2",
     position: new THREE.Vector3(2.25, 1, 1),
     lookAt: new THREE.Vector3(2.26, 1.01, 0.95),
+    mobile: {
+      position: new THREE.Vector3(2.25, 1, 1),
+      lookAt: new THREE.Vector3(2.3, 1, 0.95),
+    },
   },
   screenD: {
     targetId: "screenD",
     position: new THREE.Vector3(1, -0.5, -0.25),
     lookAt: new THREE.Vector3(1, -0.5, -0.5),
+    mobile: {
+      position: new THREE.Vector3(1, -0.5, -0.25),
+      lookAt: new THREE.Vector3(1.1, -0.5, -0.5),
+    },
   },
   screenD2: {
     targetId: "screenD2",
     position: new THREE.Vector3(-3.5, 3.5, -1),
     lookAt: new THREE.Vector3(-3.75, 3.5, -1.25),
+    mobile: {
+      position: new THREE.Vector3(-3.5, 3.5, -1),
+      lookAt: new THREE.Vector3(-3.55, 3.5, -1.25),
+    },
   },
   screenD3: {
     targetId: "screenD3",
     position: new THREE.Vector3(2, 3.8, -2.5),
     lookAt: new THREE.Vector3(2, 3.75, -2.75),
+    mobile: {
+      position: new THREE.Vector3(2, 3.8, -2.5),
+      lookAt: new THREE.Vector3(1.75, 3.75, -2.75),
+    },
   },
   screenD4: {
     targetId: "screenD4",
     position: new THREE.Vector3(2.5, 3.8, -2),
     lookAt: new THREE.Vector3(3.25, 3.75, -2.25),
+    mobile: {
+      position: new THREE.Vector3(2.5, 3.8, -1),
+      lookAt: new THREE.Vector3(4.5, 3.75, -2.25),
+    },
   },
 }
 export const videoSrcs = [

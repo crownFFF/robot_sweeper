@@ -1,0 +1,19 @@
+@use "sass:map";
+// public
+$public: (
+  off_ic: (
+    path: "/icons/",
+    file: "png",
+  ),
+
+);
+
+
+// public
+@each $key, $map in $public {
+  .#{$key} {
+    background: url("#{map.get($map,path)}#{$key}.#{map.get($map,file)}")
+      no-repeat
+      center/contain;
+  }
+}
