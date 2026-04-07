@@ -2,6 +2,7 @@ import { Bytesized, Jersey_25 } from "next/font/google"
 import "@/app/scss/style.scss"
 import localFont from "next/font/local"
 import Navbar from "./components/Navbar"
+import MusicProvider from "./components/MusicProvider"
 
 const cubic = localFont({
   src: "./assets/fonts/Cubic_11.ttf",
@@ -68,6 +69,7 @@ export default function RootLayout({ children }) {
             </filter>
           </defs>
         </svg>
+        <MusicProvider/>
         <Navbar />
         {children}
       </body>

@@ -8,7 +8,6 @@ import { useEffect, useMemo, useRef } from "react"
 import { editable as e, PerspectiveCamera, SheetProvider } from "@theatre/r3f"
 import { createDraggable } from "animejs"
 import { projectList } from "../lib/info"
-import robot from "@/app/assets/project/robot.png"
 import Image from "next/image"
 import Link from "next/link"
 
