@@ -1,0 +1,45 @@
+@use "../base/index" as *;
+
+aside {
+  @include position(fixed, $t: 8rem, $z: 10);
+  @include flex($ai: center, $jc: center, $g: 2);
+  scale: 1 1;
+  transition:
+    scale 0.15s 0.75s,
+    filter 0.2s 0.75s,
+    box-shadow 0.15s 0.75s;
+  filter: blur(0rem);
+  box-shadow: inset 0 0 0rem #fff;
+  @starting-style {
+    scale: 0.5 0;
+    filter: blur(1rem);
+    box-shadow:
+      inset 0 0 1rem 20rem #fff,
+      0 0 1rem 20rem #fff;
+  }
+  button {
+    color: #fff;
+    font-family: var(--bytesized);
+    font-size: 1.25rem;
+  }
+  input {
+    background: linear-gradient(
+      to right,
+      #3a3a3a calc(var(--range) * 1%),
+      #e5e5e5cc calc(var(--range) * 1%)
+    );
+    border: 1px solid #fff;
+    box-shadow:
+      inset 1px 1px 0 #ff000080,
+      inset -1px -1px 0 #00ffff80;
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 0.75rem;
+      height: 0.75rem;
+      background: #fff;
+    }
+    &:disabled {
+      filter: brightness(0.2);
+    }
+  }
+}

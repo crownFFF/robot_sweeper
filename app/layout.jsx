@@ -3,6 +3,7 @@ import "@/app/scss/style.scss"
 import localFont from "next/font/local"
 import Navbar from "./components/Navbar"
 import MusicProvider from "./components/MusicProvider"
+import MusicAside from "./components/MusicAside"
 
 const cubic = localFont({
   src: "./assets/fonts/Cubic_11.ttf",
@@ -71,6 +72,7 @@ export default function RootLayout({ children }) {
         </svg>
         <MusicProvider/>
         <Navbar />
+        <MusicAside/>
         {children}
       </body>
     </html>

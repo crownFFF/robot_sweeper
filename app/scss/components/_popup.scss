@@ -1,9 +1,7 @@
 @use "../base/index" as *;
 .filter {
   .popup {
-    @include position($p: fixed, $set:"center",$z:10);
-    width: 95vw;
-    max-width: 30rem;
+    @include position($p: fixed, $set: "center", $z: 12);
     display: none;
     &.display {
       display: block;
@@ -11,13 +9,51 @@
         display: block;
       }
     }
+    &.music {
+      width: 80%;
+      max-width: 75rem;
+      background: #3a3a3a;
+      border: 1px solid #fff;
+      padding: 2rem 2rem;
+      scale: 1 1;
+      transition:
+        scale 0.15s .3s,
+        filter 0.2s .3s,
+        box-shadow 0.15s .3s;
+      filter: blur(0rem);
+      box-shadow: inset 0 0 0rem #fff;
+      @starting-style {
+        scale: 0.5 0;
+        filter: blur(1rem);
+        box-shadow:
+          inset 0 0 1rem 20rem #fff,
+          0 0 1rem 20rem #fff;
+      }
+      p {
+        font-size: 2.25rem;
+        line-height: 2;
+        text-transform: uppercase;
+        text-align: center;
+      }
+      div {
+        @include flex($ai: center, $jc: center, $g: 5);
+        button {
+          font-family: var(--bytesized);
+          font-size: 2.25rem;
+          line-height: 2;
+          text-transform: uppercase;
+          filter: drop-shadow(2px 2px 0 #f00) drop-shadow(-2px -2px 0 #0ff);
+          color: #fff;
+          letter-spacing: 2px;
+        }
+      }
+    }
   }
   .mask {
     display: none;
     width: 100%;
     height: 100%;
-    @include position($p: fixed, $t: 0, $l: 0, $z: 9);
+    @include position($p: fixed, $t: 0, $l: 0, $z: 11);
     background: #00000080;
   }
 }
-    

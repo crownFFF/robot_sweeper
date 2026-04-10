@@ -5,6 +5,7 @@ const useMusicStore = create(
   subscribeWithSelector((set, get) => {
     return {
       audio: null,
+      firstPlay: false,
       isPlaying: false,
       volume: 0.3,
       init: () => {
@@ -26,12 +27,15 @@ const useMusicStore = create(
         audio.pause()
         set({ isPlaying: false })
       },
-      setVolum: v => {
+      setVolume: v => {
         const audio = get().audio
         if (!audio) return
         audio.volume = v
-        set({ volum: v })
+        set({ volume: v })
       },
+      setFirstPlay:()=>{
+        set({ firstPlay: true })
+      }
     }
   }),
 )
